@@ -11,7 +11,7 @@ function ResponsiveNav() {
   const [open, setOpen] = useState(false);
   return (
     <div className="dark">
-      <nav className="flex items-center justify-between py-8  shadow-md bg-slate-900 text-slate-300 text-xl">
+      <nav className="flex items-center justify-between py-8  dark:shadow-md bg-slate-900 text-slate-300 text-xl">
         <div className="pl-10 ">
           <img src={logo} alt="Logo" />
         </div>
@@ -46,6 +46,7 @@ function ResponsiveNav() {
             </div>
           )}
     </div>
+    //watched tutorial of implementing dark and light mode.
   );
 }
 export default ResponsiveNav;
