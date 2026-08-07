@@ -5,11 +5,12 @@ const navData = [
   { name: "Home", href: "#" ,bgcolor:"bg-rose-500"},
   { name: "About Us", href: "#" ,bgcolor:"bg-lime-600"},
   { name: "Services", href: "#" ,bgcolor:"bg-gray-100"},
-  { name: "Contact Us", href: "#" ,bgcolor:"bg-orange-300"},
+  { name: "Contact Us", href: "" ,bgcolor:"bg-orange-300"},
 ];
 function ResponsiveNav() {
   const [open, setOpen] = useState(false);
   const [theme,setTheme] = useState("light");
+  const [contact,setShowContact] = useState(false);
   return (
     <div className={theme}>
       <nav className="flex items-center justify-between py-8 text-xl bg-slate-100 dark:bg-slate-900 text-white">
@@ -17,14 +18,21 @@ function ResponsiveNav() {
           <img src={logo} alt="Logo" />
         </div>
         <ul className="flex gap-20 pr-30 text-slate-900 dark:text-white">
-          <div className="hidden sm:flex gap-20">
             <button className="cursor-pointer bg-slate-400 ph-3 rounded " onClick={()=> setTheme(theme==="light"?"dark":"light")}>{theme==="light"?"☾":"🌞"}</button>
+          <div className="hidden sm:flex gap-20">
             {navData.map((elements) => (
               <li
                 key={elements.name}
                 className="hover:scale-120 hover:text-rose-700 transition duration-300"
               >
-                <a href={elements.href}>{elements.name}</a>
+                <a href={elements.href} onClick={
+                  (e)=>{
+                    if(elements.name === "Contact Us"){
+                      e.preventDefault();
+                      setShowContact(!contact);
+                    }
+                  }
+                }>{elements.name}</a>
               </li>
             ))}
           </div>
@@ -47,8 +55,16 @@ function ResponsiveNav() {
               ))}
             </div>
           )}
+          {contact &&(
+            <div>
+              <form action="">
+                <label htmlFor="name">Name</label>
+                <input type="text" />
+                <button>Submit</button>
+              </form>
+            </div>
+          )}
     </div>
-    //watched tutorial of implementing dark and light mode.
   );
 }
 export default ResponsiveNav;
