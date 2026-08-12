@@ -10,9 +10,9 @@ import Airpods from './assets/airpods.jpeg';
 
 
 function getLevelInfo(counter){
-    if(counter>=100) return {level:'max',increment:20};
-    if(counter>=75) return {level:3,increment:10};
-    if(counter>=25) return {level:2,increment:5};
+    if(counter>=1000) return {level:'max',increment:20002000};
+    if(counter>=750) return {level:3,increment:100000};
+    if(counter>=5) return {level:2,increment:500};
     return {level:1,increment:1};
 }
 const products = [
@@ -31,18 +31,31 @@ function Game(){
     let [cart,setCart] = useState([]);
 
     function handleIncrement(type){
-        setCounter(prev=> type=='increase'? prev+increment: prev-increment );
+        setCounter(prev=> type=='increase'? prev+increment: prev-1);
     }   
     function handleCart(product){
-        if(counter>=products.price){
-            counter=counter-products.price;
+        if(counter>=product.price){
             setCart(prev=>[...prev,product])
+            setCounter(counter-product.price)
+            getLevelInfo(counter)
         }else{
             alert(`No sufficient points to purchase item`)
         }
     }
     return(
-        <div className="flex items-center justify-between gap-3 m-8 mx-[20vh]">
+        <div className="">
+            <div className="bg-slate-900 text-slate-100">
+                <div className="flex items-center justify-between mx-[40vh] bg-slate-800 px-15">
+                    <ul>
+                        <li><a className="cursor-pointer hover:bg-slate-700 transition ease-in-out duration-300 px-2 py-4 inline-block" text href="">Game</a></li>
+                    </ul>
+                    <ul className="flex gap-15 ">
+                        <li><a className="cursor-pointer  hover:bg-slate-700 transition ease-in-out duration-300 px-2 py-4 inline-block" href="">GameZone</a></li>
+                        <li><a className="cursor-pointer  hover:bg-slate-700 transition ease-in-out duration-300 px-2 py-4 inline-block" href="">Buy Products</a></li>
+                        <li><a className="cursor-pointer  hover:bg-slate-700 transition ease-in-out duration-300 px-2 py-4 inline-block" href="">🛒 Carts</a></li>
+                    </ul>
+                </div>
+            </div>
             <div className="flex flex-col gap-20 items-center justify-center">
                 <h1>Level: {level}</h1>
                 <p>Point: {increment}</p>
@@ -60,7 +73,7 @@ function Game(){
                         <div className="flex mt-6">
                             <p className="p-3 mr-3 bg-slate-200">Price: <span>{items.price}</span></p>
                             <button onClick={()=>{
-                                handleCart({items})
+                                handleCart(items)
                                 }} className="bg-orange-300 p-3 cursor-pointer hover:bg-orange-600 transition ease-in-out duration-400">Add to Cart</button>
                         </div>
                     </div>
