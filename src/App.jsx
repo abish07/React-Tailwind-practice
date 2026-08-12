@@ -1,31 +1,22 @@
-import logo from "./assets/react.svg";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { GameProvider } from "./GameContext";
+import Navbar from "./pages/Navbar.jsx";
+import Home from "./pages/Home.jsx";
+import Products from "./pages/Products.jsx";
+import Cart from "./pages/Cart.jsx";
 
-function App() {
-
-  return (
-    // <div className="flex  items-center justify-between  text-white bg-slate-500 p-4">
-    //   <div className="font-bold">Logo</div>
-    //   <div className="flex flex-col gap-4">
-    //     <span>Home</span>
-    //     <span>About Us</span>
-    //     <span>Services</span>
-    //     <span>Contact Us</span>
-    //   </div>
-    // </div>
-    <div className="flex items-center justify-between p-10 text-xl bg-slate-600 ">
-        <div>
-          <img src={logo} alt="ogo" className="w-10 h-10"/>
-        </div>
-        <div>
-          <ul  className="flex gap-10 text-slate-20 shadow-md ">
-            <a href="#"><li className="hover:text-white transition duration-300 ease-in-out">Home</li></a>
-            <a href="#"><li>Services</li></a>
-            <a href="#"><li>About Us</li></a>
-            <a href="#"><li>Contact Us</li></a>
-          </ul>
-        </div>
-    </div>
-  );
+function App(){
+    return (
+        <BrowserRouter>
+            <GameProvider>
+                <Navbar />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/products" element={<Products />} />
+                    <Route path="/cart" element={<Cart />} />
+                </Routes>
+            </GameProvider>
+        </BrowserRouter>
+    );
 }
-
-export default App
+export default App;
